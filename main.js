@@ -1,11 +1,11 @@
 
 
-let error = {
+var error = {
     status: '',
     reason: ''
 };
 
-let taskNumber = prompt('Enter task number');
+var taskNumber = prompt('Enter task number');
 if (taskNumber == 1) {
     console.log(drawChessBoard(true, 6, '*'));
 } else if (taskNumber == 2) {
@@ -19,7 +19,7 @@ if (taskNumber == 1) {
 } else if (taskNumber == 5) {
     console.log(isHappy(context));
 } else if (taskNumber == 6) {
-    console.log(findIntegers(10, 256));
+    console.log(findIntegers(10, 255));
 } else if (taskNumber == 7) {
     console.log(findFibo(context2));
 } else {

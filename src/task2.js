@@ -8,7 +8,7 @@ const envelop2 = {
 };
 
 function checkEnvelopes(env1, env2) {
-    let result = '';
+    var result = '';
 
     if (
         !isNaN(parseFloat(env1.width)) && !isNaN(parseFloat(env1.height))

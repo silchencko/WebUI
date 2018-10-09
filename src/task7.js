@@ -1,17 +1,17 @@
-let context1 = {
+var context1 = {
     min: 12,
     max: 167,
 };
-let context2 = {
+var context2 = {
     length: 100,
 }
 
 function findSimpleFibo (end) {
-    let prev = 0,
+    var prev = 0,
     curr = 1,
     next = 0;
     fibo = [prev, curr];
-    for (let i = 1; next <= end; i++) {
+    for (var i = 1; next <= end; i++) {
         fibo[i] = curr;
         next = prev + curr;
         prev = curr;
@@ -21,7 +21,7 @@ function findSimpleFibo (end) {
 }
 
 function findFibo(cont) {
-    let result,
+    var result,
     min,
     max;
     if (!isNaN(parseFloat(cont.min)) && !isNaN(parseFloat(cont.max)) || !isNaN(parseFloat(cont.length))) {
@@ -33,7 +33,7 @@ function findFibo(cont) {
             max = cont.length;
         } 
         fibo = findSimpleFibo(max);
-        for (let i = 0; i < fibo.length; i++) {
+        for (var i = 0; i < fibo.length; i++) {
             if (fibo[i] >= min) {
                 fibo = fibo.slice(i);
                 break;

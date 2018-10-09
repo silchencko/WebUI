@@ -1,8 +1,8 @@
-let context = {
+var context = {
     min: '000000',
     max: '999999'
 }
-let happyTickets = {
+var happyTickets = {
     vinner: '',
     numHappyByMirror: 0,
     numHappyEvenOdd: 0
@@ -19,9 +19,9 @@ function isHappyByMirror(ticket) {
 }
 
 function isHappyEvenOdd(ticket) {
-    let evenSum = 0;
-    let oddSum = 0;
-    for(let i = 0; i < ticket.length; i++) {
+    var evenSum = 0;
+    var oddSum = 0;
+    for(var i = 0; i < ticket.length; i++) {
         if (i % 2 == 0) {
             evenSum += parseInt(ticket[i], 10);
         } else {
@@ -35,10 +35,10 @@ function isHappyEvenOdd(ticket) {
     }
 }
 function makeFullTicket(number) {
-    let ticket = String(number);
-    for (let i = 0; i < (6-ticket.length); i++) {
+    var ticket = String(number);
+    for (var i = 0; i < (6-ticket.length); i++) {
         ticket = '0' + ticket;
-    }
+    }   
     return ticket;
 }
 
@@ -52,12 +52,12 @@ function checkContext(obj) {
 }
 
 function isHappy(cont) {
-    let result;
+    var result;
     if (checkContext(cont)) {
-        let quantityByMirror = 0;
-        let quantityEvenOdd = 0;
-        for (let i = parseInt(cont.min); i <= parseInt(cont.max); i++) {
-            let fullTicket = makeFullTicket(i);
+        var quantityByMirror = 0;
+        var quantityEvenOdd = 0;
+        for (var i = parseInt(cont.min); i <= parseInt(cont.max); i++) {
+            var fullTicket = makeFullTicket(i);
             if (isHappyByMirror(fullTicket)) {
                 quantityByMirror++;
             }        
@@ -79,6 +79,6 @@ function isHappy(cont) {
         error.status = 'failed';
         error.reason = 'Ticket numbers must have 6 symbols and all of them must be numeral';
         result = error;
-    }
+ s   }
     return result;
 }

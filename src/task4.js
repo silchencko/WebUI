@@ -1,15 +1,15 @@
-let num = 12344377343;
+var num = 12344377343;
 
 function findPalindrom(number) {
-    let result = [];
+    var result = [];
     if (number > 10 && !isNaN(number)) {
-        let str = String(number);
+        var str = String(number);
 
         /* Check even palindrom */
-        for (let i = 0; i < str.length; i++) {
+        for (var i = 0; i < str.length; i++) {
             if (str[i] === str[i+1]) {
-                let start = i;
-                let end = i+1;
+                var start = i;
+                var end = i+1;
                 if (start > 0 && end < str.length-1 && str[start-1] === str[end+1]) {
                     start--;
                     end ++;
@@ -19,8 +19,8 @@ function findPalindrom(number) {
 
             /* Check odd palindrom */
             if (str[i-1] === str[i+1]) {
-                let start = i-1;
-                let end = i+1;
+                var start = i-1;
+                var end = i+1;
                 if (start > 0 && end < str.length-1 && str[start-1] === str[end+1]) {
                     start--;
                     end ++;
