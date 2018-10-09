@@ -1,28 +1,20 @@
 
-
-var error = {
-    status: '',
-    reason: ''
-};
-
-var taskNumber = prompt('Enter task number');
-if (taskNumber == 1) {
-    console.log(drawChessBoard(true, 6, '*'));
-} else if (taskNumber == 2) {
-    console.log(checkEnvelopes(envelop1, envelop2));
-} else if (taskNumber == 3) {
-    console.log(sortFigures(triangles));
-} else if (taskNumber == 4) {
-    console.log(findPalindrom(num));
-} else if (taskNumber == 41) {
-    console.log(findPalindrom_1(numb));
-} else if (taskNumber == 5) {
-    console.log(isHappy(context));
-} else if (taskNumber == 6) {
-    console.log(findIntegers(10, 255));
-} else if (taskNumber == 7) {
-    console.log(findFibo(context2));
-} else {
-    console.log('No such task. Enter a number from 1 to 7');
+function Error(reason) {
+    this.status = 'failed';
+    this.reason = reason;
 }
 
+var tasksList = [drawChessBoard, checkEnvelopes, sortFigures, findPalindrom, isHappy, findIntegers, findFibo];
+var params = [[boardLength, boardWidth, boardSymbol], [envelop1, envelop2], triangles, number, context, [intLength, minSquare], context2];
+
+var taskNumber = prompt('Enter task number');
+function runTask(num) {
+    if (num > 0 || num < 8) {
+        num--;
+        console.log(tasksList[num](params[num]));
+    } else {
+        console.log('No such task. Enter a number from 1 to 7');
+    }
+}
+
+runTask(taskNumber);

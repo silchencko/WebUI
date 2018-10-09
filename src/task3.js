@@ -27,8 +27,8 @@ function areSidesNumbers(arr) {
 }
 
 function sortBySquar(elem1, elem2) {
-    if (elem1.countSquar() > elem2.countSquar()) return 1;
-    if (elem1.countSquar() < elem2.countSquar()) return -1;
+    if (countSquar(elem1) > countSquar(elem2)) return 1;
+    if (countSquar(elem1) < countSquar(elem2)) return -1;
 }
 
 function returnVertices(item) {
@@ -42,8 +42,7 @@ function sortFigures(arr) {
         var newArr = arr.map(returnVertices);
         result = newArr;
     } else {
-        error.status = 'failed';
-        error.reason = 'All sides of triangle must be numbers more then 0';
+        var error = new Error('All sides of triangle must be numbers more then 0');
         result = error;
     }
     return result;

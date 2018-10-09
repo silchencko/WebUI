@@ -1,4 +1,4 @@
-var num = 12344377343;
+var number = 12344377343;
 
 function findPalindrom(number) {
     var result = [];
@@ -33,8 +33,7 @@ function findPalindrom(number) {
             result = 0;
         }
     } else {
-        error.status = 'failed';
-        error.reason = 'Enter number. Numer must be more then 10';
+        var error = new Error('Enter number. Numer must be more then 10');        
         result = error;
     }
     return result;

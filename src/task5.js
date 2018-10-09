@@ -76,9 +76,8 @@ function isHappy(cont) {
         happyTickets.numHappyEvenOdd = quantityEvenOdd;
         result = happyTickets;
     } else {
-        error.status = 'failed';
-        error.reason = 'Ticket numbers must have 6 symbols and all of them must be numeral';
+        var error = new Error('Ticket numbers must have 6 symbols and all of them must be numeral');                
         result = error;
- s   }
+    }
     return result;
 }

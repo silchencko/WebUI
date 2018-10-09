@@ -41,10 +41,9 @@ function findFibo(cont) {
         }
         result = fibo;
     } else {
-            error.status = 'failed';
-            error.reason = 'The context must have min and max range or length. They must be nombers.';
-            result = error;
-        }
+        var error = new Error('The context must have min and max range or length. They must be nombers.');                        
+        result = error;
+    }
 
     return result; 
 }

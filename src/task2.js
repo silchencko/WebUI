@@ -28,8 +28,7 @@ function checkEnvelopes(env1, env2) {
         }
 
     } else {
-        error.status = 'failed';
-        error.reason = 'Width and height of the envelops must be numbers more then 0';
+        var error = new Error('Width and height of the envelops must be numbers more then 0');
         result = error;
     }
     return result;
