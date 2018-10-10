@@ -1,29 +1,40 @@
-var boardLength = 5,
+var boardLength = '5',
 boardWidth = 6,
 boardSymbol = '*';
 
+function existParam(attributes) {
+    if (attributes.length == 3) {
+        return true;
+    } else {
+        throw new Error ('Enter length, width and symbol');
+    }
+}
+function checkParam (attributes) {
+    if (attributes[0] > 0 && attributes[1] > 0 && !isNaN(parseFloat(attributes[0])) && !isNaN(parseFloat(attributes[1]))) {
+        return true;
+    } else {
+        throw new Error ('Width must be numbers more then 0');
+    }
+}
+
 function drawChessBoard(length, width, symb) {
     var result = '';
-
-    if (length == undefined || width == undefined || symb == undefined) {
-        var error = new Error('Enter length, width and symbol');        
-        result = error;
-
-    } else if (length > 0 && width > 0 && !isNaN(parseFloat(length)) && !isNaN(parseFloat(width))) {
-        
-        for (var i = 0; i < length; i++) {
-            var symbolWithSpace = symb + ' ';
-            if (i%2 !== 0) symbolWithSpace = ' ' + symb;
-            for (var j = 0; j < width; j++) {
-                result += symbolWithSpace;
+    try {
+        if (existParam(arguments) && checkParam(arguments)) {
+            for (var i = 0; i < length; i++) {
+                var symbolWithSpace = symb + ' ';
+                if (i%2 !== 0) symbolWithSpace = ' ' + symb;
+                for (var j = 0; j < width; j++) {
+                    result += symbolWithSpace;
+                }
+                result += '\n';
             }
-            result += '\n';
-        }
-
-    } else {
-        var error = new Error('Width must be numbers more then 0');
-        result = error;
+        } 
+        return result;
+    } catch(error) {
+        result = error.reason;
     }
-
     return result;
 }
+
+
