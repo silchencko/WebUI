@@ -1,20 +1,29 @@
-var intLength = 10,
-minSquare = 256;
+var integersParam = {
+    length: 10,
+    minSquare: 255,
+}
 
-function findIntegers(length, minSquare) {
-    var result;
-    if (isNaN(length) || length <= 0) {
-        var error = new Error('Length must be a number more then 0');                
-        result = error;
-    } else if (Math.sqrt(minSquare) % 1 !== 0) {
-        var error = new Error('Min square must be a square of an integer');                
-        result = error;
+function checkIntParams(length, square) {
+    if (isNaN(length) || isNaN(square) || length <= 0  || square <= 0) {
+        throw new Error ('Length and min square must be numbers more then 0');
     } else {
-        var ints = [];
-        for (var i = Math.sqrt(minSquare); ints.length < length; i++) {
-            ints.push(i);
+        return true;
+    }
+}
+
+function findIntegers(obj) {
+    var result;
+    try {
+        if (checkIntParams(obj.length, obj.minSquare)) {
+            var ints = [];
+            for (var i = Math.ceil(Math.sqrt(obj.minSquare)); ints.length < obj.length; i++) {
+                ints.push(i);
+            }
+            result = ints.join(', ');
         }
-        result = ints.join(', ');
+        return result;
+    } catch(error) {
+        result = error.reason;
     }
     return result;
 }

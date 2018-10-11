@@ -1,35 +1,48 @@
-const envelop1 = {
-    width: "true",
-    height: 15
+var envelop1 = {
+    width: 25,
+    height: 30
 };
-const envelop2 = {
+var envelop2 = {
     width: 20,
-    height: 36.5
+    height: 24.5
 };
+var envelops = [envelop1, envelop2]
 
-function checkEnvelopes(env1, env2) {
-    var result = '';
-
-    if (
-        !isNaN(parseFloat(env1.width)) && !isNaN(parseFloat(env1.height))
-            && !isNaN(parseFloat(env2.width)) && !isNaN(parseFloat(env2.height))
-            && env1.width > 0 && env1.height > 0 && env2.width > 0 && env2.height > 0) {
-
-        if (env1.width > env2.width && env1.height > env2.height) {
-            result = 1;
-        } else if (env1.width > env2.height && env1.height > env2.width) {
-            result = 1;
-        } else if (env2.width > env1.width && env2.height > env1.height) {
-            result = 1;
-        } else if (env2.width > env1.height && env2.height > env1.width) {
-            result = 1;
-        } else {
-            result = 0;
-        }
-
+function existParams(params, amount) {
+    if (params.length >= amount) {
+        return true;
     } else {
-        var error = new Error('Width and height of the envelops must be numbers more then 0');
-        result = error;
+        throw new Error('Enter two envelops');
+    }
+}
+
+function checkEnvelop(obj) {
+    if (!('width' in obj) || !('height' in obj)) {
+        throw new Error('The envelope has to have length and width');
+    } else if (!isNaN(parseFloat(obj.width)) && !isNaN(parseFloat(obj.height))
+            && obj.width > 0 && obj.height > 0) {
+        return true;
+    } else {
+        throw new Error('Width and height of the envelops must be numbers more then 0');
+    }
+}
+
+function putInEnvelopes(envs) {
+    var result = '';
+    try {
+        if (existParams(envs, 2) && checkEnvelop(envs[0]) && checkEnvelop(envs[1])) {
+            if ( (envs[0].width > envs[1].width && envs[0].height > envs[1].height)
+            || (envs[0].width > envs[1].height && envs[0].height > envs[1].width)
+            || (envs[1].width > envs[0].width && envs[1].height > envs[0].height)
+            || (envs[1].width > envs[0].height && envs[1].height > envs[0].width)) {
+            result = 1; 
+            } else {
+            result = 0;
+            } 
+        }
+        return result;
+    } catch(error) {
+        result = error.reason; 
     }
     return result;
 }

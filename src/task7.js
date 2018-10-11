@@ -1,6 +1,6 @@
 var context1 = {
     min: 12,
-    max: 167,
+    max: 156,
 };
 var context2 = {
     length: 100,
@@ -20,30 +20,40 @@ function findSimpleFibo (end) {
     return fibo;
 }
 
+function checkFiboParams(obj) {
+    if (!isNaN(parseFloat(obj.min)) && !isNaN(parseFloat(obj.max)) && (obj.min < obj.max) 
+        || !isNaN(parseFloat(obj.length))) {
+        return true;
+    } else {
+        throw new Error('Enter min and max or length. They must be nombers. Max must be more then min');
+    }
+}
+
 function findFibo(cont) {
     var result,
     min,
     max;
-    if (!isNaN(parseFloat(cont.min)) && !isNaN(parseFloat(cont.max)) || !isNaN(parseFloat(cont.length))) {
-        if (cont.min && cont.max) {
-            min = cont.min;
-            max = cont.max;
-        } else if (cont.length) {
-            min = 0;
-            max = cont.length;
-        } 
-        fibo = findSimpleFibo(max);
-        for (var i = 0; i < fibo.length; i++) {
-            if (fibo[i] >= min) {
-                fibo = fibo.slice(i);
-                break;
+    try {
+        if (checkFiboParams(cont)) {
+            if (cont.min && cont.max) {
+                min = cont.min;
+                max = cont.max;
+            } else if (cont.length) {
+                min = 0;
+                max = cont.length;
+            } 
+            fibo = findSimpleFibo(max);
+            for (var i = 0; i < fibo.length; i++) {
+                if (fibo[i] >= min) {
+                    fibo = fibo.slice(i);
+                    break;
+                }
             }
+            result = fibo;
         }
-        result = fibo;
-    } else {
-        var error = new Error('The context must have min and max range or length. They must be nombers.');                        
-        result = error;
+        return result;
+    } catch(error) {
+        result = error.reason;
     }
-
     return result; 
 }
