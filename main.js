@@ -5,7 +5,7 @@ function Error(reason) {
 }
 
 var tasksList = [drawChessBoard, putInEnvelopes, sortFigures, findPalindrom, isHappy, findIntegers, findFibo];
-var params = [myBoard, [envelop1, envelop2], triangles, number, context, integersParam, context2];
+var params = [myBoard, envelops, triangles, number, context, integersParam, context2];
 
 var taskNumber = prompt('Enter task number');
 function runTask(num) {

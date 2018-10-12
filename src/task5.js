@@ -10,8 +10,10 @@ var happyTickets = {
 
 function isHappyByMirror(ticket) {
     if (ticket.length == 6 
-        && (parseInt(ticket[0], 10) + parseInt(ticket[1], 10) + parseInt(ticket[2], 10)) 
-        == (parseInt(ticket[3], 10) + parseInt(ticket[4], 10) + parseInt(ticket[5], 10))) {
+        // && (parseInt(ticket[0], 10) + parseInt(ticket[1], 10) + parseInt(ticket[2], 10)) 
+        && (parseInt(ticket.slice(0, 3), 10)
+        // == (parseInt(ticket[3], 10) + parseInt(ticket[4], 10) + parseInt(ticket[5], 10)))
+        == parseInt(ticket.slice(3), 10))) {
         return true;
     } else {
         return false;

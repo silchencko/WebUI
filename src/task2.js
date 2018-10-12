@@ -27,19 +27,24 @@ function checkEnvelop(obj) {
     }
 }
 
+function canPutFirstInSecond(item1, item2) {
+    if ((item1.width > item2.width && item1.height > item2.height)
+    || (item1.height > item2.width && item1.width > item2.height)) {
+        return 1;
+    }
+    return 0;
+}
+
 function putInEnvelopes(envs) {
-    var result = '';
+    var result = 0;
     try {
         if (existParams(envs, 2) && checkEnvelop(envs[0]) && checkEnvelop(envs[1])) {
-            if ( (envs[0].width > envs[1].width && envs[0].height > envs[1].height)
-            || (envs[0].width > envs[1].height && envs[0].height > envs[1].width)
-            || (envs[1].width > envs[0].width && envs[1].height > envs[0].height)
-            || (envs[1].width > envs[0].height && envs[1].height > envs[0].width)) {
-            result = 1; 
+            if ((envs[0].width + envs[0].height) > (envs[1].width + envs[1].height)) {
+                result = canPutFirstInSecond(envs[0], envs[1]);
             } else {
-            result = 0;
-            } 
-        }
+                result = canPutFirstInSecond(envs[1], envs[0]);
+            };
+        };
         return result;
     } catch(error) {
         result = error.reason; 
