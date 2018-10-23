@@ -1,28 +1,80 @@
-var context = {
-    min: '000001',
-    max: '999999'
-}
-var happyTickets = {
-    vinner: '',
-    numHappyByMirror: 0,
-    numHappyEvenOdd: 0
-}
+var ticketsBtn = document.querySelector('.tickets-btn');
+var ticketsResult = document.querySelector('.tickets-result');
+
+function TicketsRange(min, max) {
+    this.min = min;
+    this.max = max;
+};
+
+function HappyTicketsResult(numHappyByMirror, numHappyEvenOdd) {
+    this.numHappyByMirror = numHappyByMirror;
+    this.numHappyEvenOdd = numHappyEvenOdd;
+    this.vinner = function() {
+        if (this.numHappyByMirror > this.numHappyEvenOdd) {
+            return 'Mirror method';
+        } else if (this.numHappyByMirror < this.numHappyEvenOdd) {
+            return 'EvenOdd method';
+        } else {
+            return 'No vinner';
+        }
+    }
+};
+
+function isContextReal(min, max) {
+    if (existParams(min, max)) {
+        if (isNumeric(min, max)) {
+            if ((parseFloat(min) > parseFloat(max, 10))) {
+                throw new Error('Max must be more than min');
+            } else {
+                return true;
+            }
+        }
+    } 
+};
+
+function checkContext(min, max) {
+    if (isContextReal(min, max)) {
+        if (min.length == 6 && max.length == 6) {
+            return true;
+        } else {
+            throw new Error('Min and max tickets must have 6 symbols');
+        }
+    }
+};
+
+function makeFullTicket(number) {
+    var ticket = String(number);
+    for (var i = 0; ticket.length < 6; i++) {
+        ticket = '0' + ticket;
+        makeFullTicket(ticket);
+    }   
+    return ticket;
+};
+
+function countSum(str) {
+    var sum = 0;
+    for (var i = 0; i < str.length; i++) {
+        sum += parseFloat(str[i]);
+    }
+    return sum;
+};
 
 function isHappyByMirror(ticket) {
-    if (ticket.length == 6 
-        // && (parseInt(ticket[0], 10) + parseInt(ticket[1], 10) + parseInt(ticket[2], 10)) 
-        && (parseInt(ticket.slice(0, 3), 10)
-        // == (parseInt(ticket[3], 10) + parseInt(ticket[4], 10) + parseInt(ticket[5], 10)))
-        == parseInt(ticket.slice(3), 10))) {
+    var half = ticket.length / 2,
+        left = ticket.slice(0, half),
+        right = ticket.slice(half),
+        leftSum = countSum(left),
+        rightSum = countSum(right);
+    if (leftSum == rightSum) {
         return true;
     } else {
         return false;
     }
-}
+};
 
 function isHappyEvenOdd(ticket) {
-    var evenSum = 0;
-    var oddSum = 0;
+    var evenSum = 0,
+        oddSum = 0;
     for(var i = 0; i < ticket.length; i++) {
         if (i % 2 == 0) {
             evenSum += parseInt(ticket[i], 10);
@@ -35,53 +87,41 @@ function isHappyEvenOdd(ticket) {
     } else {
         return false;
     }
-}
-function makeFullTicket(number) {
-    var ticket = String(number);
-    for (var i = 0; ticket.length < 6; i++) {
-        ticket = '0' + ticket;
-        makeFullTicket(ticket);
-    }   
-    return ticket;
-}
+};
 
-function checkContext(obj) {
-    if (String(obj.min).length == 6 && String(obj.max).length == 6 && 
-        !isNaN(obj.min) && !isNaN(obj.max)) {
-            return true;
-        } else {
-            throw new Error('Ticket numbers must have 6 symbols and all of them must be numeral');
+function countHappyTickets(cont, method) {
+    var count = 0;
+    for (var i = parseInt(cont.min); i <= parseInt(cont.max); i++) {
+        var fullTicket = makeFullTicket(i);
+        if (method(fullTicket)) {
+            count++;
         }
-}
+    }
+    return count;
+};
 
-function isHappy(cont) {
-    var result;
-    try {
-        if (checkContext(cont)) {
-            var quantityByMirror = 0;
-            var quantityEvenOdd = 0;
-            for (var i = parseInt(cont.min); i <= parseInt(cont.max); i++) {
-                var fullTicket = makeFullTicket(i);
-                if (isHappyByMirror(fullTicket)) {
-                    quantityByMirror++;
-                }        
-                if (isHappyEvenOdd(fullTicket)) {
-                    quantityEvenOdd++;
-                }
-            }
-            if (quantityByMirror > quantityEvenOdd) {
-                happyTickets.vinner = 'Mirror method';
-            } else if (quantityByMirror < quantityEvenOdd) {
-                happyTickets.vinner = 'EvenOdd method';
-            } else {
-                happyTickets.vinner = ['Mirror method', 'EvenOdd method'];
-            }
-            happyTickets.numHappyByMirror = quantityByMirror;
-            happyTickets.numHappyEvenOdd = quantityEvenOdd;
-            result = happyTickets;
-        }
-    } catch(error) {              
-        result = error.reason;
-        }
+function buildHappyTicketsResult(cont) {
+    var quantityByMirror = countHappyTickets(cont, isHappyByMirror),
+        quantityEvenOdd = countHappyTickets(cont, isHappyEvenOdd);
+    var result = new HappyTicketsResult(quantityByMirror, quantityEvenOdd);
     return result;
 }
+
+function getHappyTicketsResult() {
+    try {
+        var context,
+        result;
+        var minTicket = document.querySelector('#ticket-min').value;
+        var maxTicket = document.querySelector('#ticket-max').value;
+        if (checkContext(minTicket, maxTicket)) {
+            context = new TicketsRange(minTicket, maxTicket);
+            result = buildHappyTicketsResult(context);
+        }
+        return ticketsResult.innerHTML = 'Vinner: ' + result.vinner() 
+                                       + '; happy tickets by Mirror method: ' + result.numHappyByMirror 
+                                       + '; happy tickets by Even-odd method: ' + result.numHappyEvenOdd;
+    } catch(error) {
+        return ticketsResult.innerHTML = error.reason;
+    }
+};
+

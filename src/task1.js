@@ -1,35 +1,44 @@
-var myBoard = {
-    length: '5',
-    width: 6,
-    symbol: '*',
-} 
+var chessBoardBtn = document.querySelector('.chessBoard-btn');
+var chessBoardResult = document.querySelector('.chessBoard-result');
 
-function checkBoardParam (obj) {
-    if (obj.length > 0 && obj.width > 0 && !isNaN(parseFloat(obj.length)) && !isNaN(parseFloat(obj.width)) && ('symbol' in obj)) {
-        return true;
-    } else {
-        throw new Error ('Enter length, width and symbol. Width and length must be numbers more then 0');
-    }
-}
+function ChessBoard(width, length, symbol) {
+    this.width = width;
+    this.length = length;
+    this.symbol = symbol;
+};
 
 function drawChessBoard(board) {
     var result = '';
-    try {
-        if (checkBoardParam(board)) {
-            for (var i = 0; i < board.length; i++) {
-                var symbolWithSpace = board.symbol + ' ';
-                if (i%2 !== 0) symbolWithSpace = ' ' + board.symbol;
-                for (var j = 0; j < board.width; j++) {
-                    result += symbolWithSpace;
-                }
-                result += '\n';
-            }
-        } 
-        return result;
-    } catch(error) {
-        result = error.reason;
+    for (var i = 0; i < board.length; i++) {
+        var symbolWithSpace = board.symbol + ' ';
+        if (i%2 !== 0) symbolWithSpace = ' ' + board.symbol;
+        for (var j = 0; j < board.width; j++) {
+            result += symbolWithSpace;
+        }
+        result += '\n';
     }
     return result;
 }
 
+function createBoard(width, length, symbol) {
+    if (existParams(width, length, symbol)) {
+        if (isNumeric(width, length)) {
+            return new ChessBoard(width, length, symbol);
+        }
+    }
+}
 
+function getChessBoard() {
+    var result;
+    try {
+        var boardWidth = document.querySelector('#boardWidth').value;
+        var boardLength = document.querySelector('#boardLength').value;
+        var boardSymbol = document.querySelector('#boardSymbol').value;
+
+        result = drawChessBoard(createBoard(boardWidth, boardLength, boardSymbol)); 
+
+    } catch(error) {
+        result = error.reason;
+    };
+    return chessBoardResult.innerHTML = result;
+}

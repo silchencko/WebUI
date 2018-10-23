@@ -4,17 +4,179 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
     <title>Home tasks</title>
 </head>
 <body>
+<!-- Task1 -->
+    <div class="chess">
+        <label class="task-label" for="task1">Task 1</label>
+        <input id="task1" class="task-checkbox" type="checkbox" />
+        <div class="task-content">
+            <h3 class="task-title">Chess board</h3>
+            <div>
+                <label for="boardWidth">Board width</label>
+                <input id="boardWidth" type="text" name="boardWidth" required="required" />
+            </div>
+            <div>
+                <label for="boardLength">Board length</label>
+                <input id="boardLength" type="text" name="boardLength" required="required" />
+            </div>
+            <div>
+                <label for="boardSymbol">Symbol</label>
+                <input id="boardSymbol" type="text" name="boardSymbol" required="required" />
+            </div>
+            <button class="chessBoard-btn">Draw your chess board</button>
+            <h3 class="result">Result:</h3>
+            <pre class="result__value chessBoard-result"></pre>
+        </div>
+    </div>
+<!-- Task 2 -->
+    <div class="envelopes">
+        <label class="task-label" for="task2">Task 2</label>
+        <input id="task2" class="task-checkbox" type="checkbox" />
+        <div class="task-content">
+            <h3 class="task-title">Put envelopes into each other</h3>
+            <p>Check if you can put the first envelope into the second or the second into the first.</p>
+            <p class="env1">First envelope:</p>
+            <div>
+                <label for="env1__width">Width</label>
+                <input id="env1__width" type="text" name="width" required="required" />
+            </div>
+            <div>
+                <label for="env1__height">Height</label>
+                <input id="env1__height" type="text" name="height" required="required" />
+            </div>
+            <p class="env2">Second envelope</p>
+            <div>
+                <label for="env2__width">Width</label>
+                <input id="env2__width" type="text" name="width" required="required" />
+            </div>
+            <div>
+                <label for="env2__height">Height</label>
+                <input id="env2__height" type="text" name="height" required="required" />
+            </div>
+            <button class="envelopes-btn">Check envelopes</button>
+            <h3 class="result">Result:</h3>
+            <pre class="result__value envelopes-result"></pre>
+        </div>    
+    </div>
+<!-- Task 3 -->
+    <div class="triangles">
+        <label class="task-label" for="task3">Task 3</label>
+        <input id="task3" class="task-checkbox" type="checkbox" />
+        <div class="task-content">
+            <h3 class="task-title">Sort triangles by square</h3>
+            <div class="triangle-list">
+                <div class="triangle">
+                    <p class="triangle1">Triangle 1:</p>
+                    <div>
+                        <label for="triangle1__name">Name</label>
+                        <input id="triangle1__name" type="text" name="name" required="required" />
+                    </div>
+                    <div>
+                        <label for="triangle1__side1">Side 1</label>
+                        <input id="triangle1__side1" type="text" name="side1" required="required" />
+                    </div>
+                    <div>
+                        <label for="triangle1__side2">Side 2</label>
+                        <input id="triangle1__side2" type="text" name="side2" required="required" />
+                    </div>
+                    <div>
+                        <label for="triangle1__side3">Side 3</label>
+                        <input id="triangle1__side3" type="text" name="side3" required="required" />
+                    </div>
+                </div>
+                <div class="triangle">
+                    <p class="triangle2">Triangle 2:</p>
+                    <div>
+                        <label for="triangle2__name">Name</label>
+                        <input id="triangle2__name" type="text" name="name" required="required" />
+                    </div>
+                    <div>
+                        <label for="triangle2__side1">Side 1</label>
+                        <input id="triangle2__side1" type="text" name="side1" required="required" />
+                    </div>
+                    <div>
+                        <label for="triangle2__side2">Side 2</label>
+                        <input id="triangle2__side2" type="text" name="side2" required="required" />
+                    </div>
+                    <div>
+                        <label for="triangle2__side3">Side 3</label>
+                        <input id="triangle2__side3" type="text" name="side3" required="required" />
+                    </div>
+                </div>
+                <div class="triangle">
+                    <p class="triangle3">Triangle 3:</p>
+                    <div>
+                        <label for="triangle3__name">Name</label>
+                        <input id="triangle3__name" type="text" name="name" required="required" />
+                    </div>
+                    <div>
+                        <label for="triangle3__side1">Side 1</label>
+                        <input id="triangle3__side1" type="text" name="side1" required="required" />
+                    </div>
+                    <div>
+                        <label for="triangle3__side2">Side 2</label>
+                        <input id="triangle3__side2" type="text" name="side2" required="required" />
+                    </div>
+                    <div>
+                        <label for="triangle3__side3">Side 3</label>
+                        <input id="triangle3__side3" type="text" name="side3" required="required" />
+                    </div>
+                </div>
+            </div>
+            <button class="add-btn">Add a triangle</button>
+            <button class="triangles-btn">Sort triangles</button>
+            <h3 class="result">Result:</h3>
+            <pre class="result__value triangles-result"></pre>
+        </div>
+    </div>
+    <!-- Task 4 -->
+    <div class="palindrom">
+        <label class="task-label" for="task4">Task 4</label>
+        <input id="task4" class="task-checkbox" type="checkbox" />
+        <div class="task-content">
+            <h3 class="task-title">Find palindrom</h3>
+            <div>
+                <label for="palindrom-field">Enter a nomber more then 9</label>
+                <input id="palindrom-field" type="text" required="required" name="boardWidth" />
+            </div>
+            <button class="palindrom-btn">Find palindroms</button>
+            <h3 class="result">Result:</h3>
+            <pre class="result__value palindrom-result"></pre>
+        </div>
+    </div>
+    <!-- Task 5 -->
+    <div class="tickets">
+        <label class="task-label" for="task5">Task 5</label>
+        <input id="task5" class="task-checkbox" type="checkbox" />
+        <div class="task-content">
+            <h3 class="task-title">How many happy tickets are by Moscow method and Peter method?</h3>
+            <p>Every ticket contains 6 integers. Enter min ticket number and max ticket nomber:</p>
+            <div>
+                <label for="ticket-min">Min ticket number (min "000001")</label>
+                <input id="ticket-min" type="text" required="required" name="ticket-min" />
+            </div>
+            <div>
+                <label for="ticket-max">Max ticket number (max "999999")</label>
+                <input id="ticket-max" type="text" required="required" name="ticket-max" />
+            </div>
+            <button class="tickets-btn">Count happy tickets</button>
+            <h3 class="result">Result:</h3>
+            <p class="result__value tickets-result"></p>
+        </div>
+    </div>
+    
+  
     <script src="src/task1.js"></script>
     <script src="src/task2.js"></script>
     <script src="src/task3.js"></script>
     <script src="src/task4.js"></script>
-    <script src="src/task4-1.js"></script>
     <script src="src/task5.js"></script>
     <script src="src/task6.js"></script>
     <script src="src/task7.js"></script>
+    <script src="src/visualisation.js"></script>
     <script src="main.js"></script>
     
 </body>

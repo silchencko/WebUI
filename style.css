@@ -1,0 +1,81 @@
+.task-label {
+    font-size: 36px;
+    color: #151563;
+    width: 100px;
+    padding: 5px 10px;
+    border: 1px solid #d3d3d3;
+    border-radius: 2px; 
+    box-shadow: 2px 2px 2px #808080;
+    cursor: pointer;
+}
+
+.task-label:hover {
+    color: #2323be;
+    border-color: #2323be;
+}
+
+.task-label:active {
+    color: #fff;
+    background: #4242c9;
+    border-color: #2323be;
+}
+
+.task-checkbox {
+    display: none;
+}
+
+.task-content {
+    display: none;
+    margin: 10px;
+    background: #f1f1f1;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 2px 2px 2px #808080;
+}
+
+.task-checkbox:checked + .task-content {
+    display: block;
+}
+
+label,
+button,
+p,
+.result {
+    font-size: 18px;
+}
+
+.result__value {
+    font-size: 26px;
+    line-height: 22px;
+    color: #151563;
+}
+
+button {
+    padding: 7px;
+    margin: 10px 0;
+    background: #5050c9;
+    color: #fff;
+    border-radius: 7px;
+    border: 2px solid #5050c9;  
+}
+
+button:hover {
+    background: #4242c9;
+    border: 2px solid #8585e4;
+}
+
+button:active {
+    background: #2e2ed8;
+    border: 2px solid #2323be;
+}
+
+label {
+    display: inline-block;
+    margin: 10px;
+    width: 100px;
+}
+
+.palindrom .task-content label,
+.tickets .task-content label {
+    width: 300px;
+}
