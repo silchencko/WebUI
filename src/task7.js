@@ -4,17 +4,32 @@ var fibonacciMin = document.querySelector('#fibonacci-min');
 var fibonacciMax = document.querySelector('#fibonacci-max');
 var fibonacciLength = document.querySelector('#fibonacci-length');
 
-function FiboParams(min, max) {
-    this.min = min;
-    this.max = max;
-};
-
-function findSimpleFibo (end) {
+function findFiboByMinMax(start, end) {
     var prev = 0,
     curr = 1,
     next = 0;
     fibo = [prev, curr];
     for (var i = 1; next <= end; i++) {
+        fibo[i] = curr;
+        next = prev + curr;
+        prev = curr;
+        curr = next;
+    }
+    for (var i = 0; i < fibo.length; i++) {
+        if (fibo[i] >= start) {
+            fibo = fibo.slice(i);
+            break;
+        } 
+    }
+    return fibo;
+};
+
+function findFiboByLength(length) {
+    var prev = 0,
+    curr = 1,
+    next = 0;
+    fibo = [prev, curr];
+    for (var i = 1; i <= length; i++) {
         fibo[i] = curr;
         next = prev + curr;
         prev = curr;
@@ -26,7 +41,9 @@ function findSimpleFibo (end) {
 function existFiboParams(min, max, length) {
     if (((min != undefined && min != "") && (max != undefined && max != "")) || (length != undefined && length != "")) {
         return true;   
-    } else throw new Error('Enter min and max or length');
+    } else {
+        throw new Error('Enter min and max or length');
+    }
 };
 
 function isFiboParamsNumeric(min, max, length) {
@@ -35,41 +52,28 @@ function isFiboParamsNumeric(min, max, length) {
      || (!isNaN(parseFloat(length)) && parseFloat(length) > 0)) {  
          return true;   
     } else {
-        throw new Error('Params must be nombers');
-};
-
-function buildFiboContext(min, max, length) {
-    if (length == undefined || length == "") {
-        return new FiboParams(min, max);
-    } else {
-        return new FiboParams(0, length);
+        throw new Error('Params must be nombers more than 0');
     }
-};
-
-function findFibo(arr) {
-    for (var i = 0; i < arr.length; i++) {
-        if (arr[i] >= min) {
-            arr = arr.slice(i);
-            break;
-        }
-    }
-    return arr;
 };
 
 function getFibo() {
     var result,
-        fiboContext;
+        fibo;
     var fiboMin = fibonacciMin.value;
     var fiboMax = fibonacciMax.value;
     var fiboLength = fibonacciLength.value;
     try {
         existFiboParams(fiboMin, fiboMax, fiboLength);
         isFiboParamsNumeric(fiboMin, fiboMax, fiboLength);
-        fiboContext = buildFiboContext(fiboMin, fiboMax, fiboLength);
-        fibo = findSimpleFibo(fiboContext.max);
-        result = findFibo(fibo);
+
+        if (fiboLength == undefined || fiboLength == "") {
+            result = findFiboByMinMax(fiboMin, fiboMax);
+
+        } else {
+            result = findFiboByLength(fiboLength);
+        }
         return fibonacciResult.innerHTML = result;    
     } catch(error) {
         return fibonacciResult.innerHTML = error.reason;
     }
-}
+};
