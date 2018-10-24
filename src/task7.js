@@ -1,10 +1,13 @@
-var context1 = {
-    min: 12,
-    max: 156,
+var fibonacciBtn = document.querySelector('.fibonacci-btn');
+var fibonacciResult = document.querySelector('.fibonacci-result');
+var fibonacciMin = document.querySelector('#fibonacci-min');
+var fibonacciMax = document.querySelector('#fibonacci-max');
+var fibonacciLength = document.querySelector('#fibonacci-length');
+
+function FiboParams(min, max) {
+    this.min = min;
+    this.max = max;
 };
-var context2 = {
-    length: 100,
-}
 
 function findSimpleFibo (end) {
     var prev = 0,
@@ -20,40 +23,53 @@ function findSimpleFibo (end) {
     return fibo;
 }
 
-function checkFiboParams(obj) {
-    if (!isNaN(parseFloat(obj.min)) && !isNaN(parseFloat(obj.max)) && (obj.min < obj.max) 
-        || !isNaN(parseFloat(obj.length))) {
-        return true;
-    } else {
-        throw new Error('Enter min and max or length. They must be nombers. Max must be more then min');
-    }
-}
+function existFiboParams(min, max, length) {
+    if (((min != undefined && min != "") && (max != undefined && max != "")) || (length != undefined && length != "")) {
+        return true;   
+    } else throw new Error('Enter min and max or length');
+};
 
-function findFibo(cont) {
-    var result,
-    min,
-    max;
-    try {
-        if (checkFiboParams(cont)) {
-            if (cont.min && cont.max) {
-                min = cont.min;
-                max = cont.max;
-            } else if (cont.length) {
-                min = 0;
-                max = cont.length;
-            } 
-            fibo = findSimpleFibo(max);
-            for (var i = 0; i < fibo.length; i++) {
-                if (fibo[i] >= min) {
-                    fibo = fibo.slice(i);
-                    break;
-                }
-            }
-            result = fibo;
-        }
-        return result;
-    } catch(error) {
-        result = error.reason;
+function isFiboParamsNumeric(min, max, length) {
+    if ((!isNaN(parseFloat(min)) && parseFloat(min) >= 0) 
+     && (!isNaN(parseFloat(max)) && parseFloat(max) > 0) 
+     || (!isNaN(parseFloat(length)) && parseFloat(length) > 0)) {  
+         return true;   
+    } else {
+        throw new Error('Params must be nombers');
+};
+
+function buildFiboContext(min, max, length) {
+    if (length == undefined || length == "") {
+        return new FiboParams(min, max);
+    } else {
+        return new FiboParams(0, length);
     }
-    return result; 
+};
+
+function findFibo(arr) {
+    for (var i = 0; i < arr.length; i++) {
+        if (arr[i] >= min) {
+            arr = arr.slice(i);
+            break;
+        }
+    }
+    return arr;
+};
+
+function getFibo() {
+    var result,
+        fiboContext;
+    var fiboMin = fibonacciMin.value;
+    var fiboMax = fibonacciMax.value;
+    var fiboLength = fibonacciLength.value;
+    try {
+        existFiboParams(fiboMin, fiboMax, fiboLength);
+        isFiboParamsNumeric(fiboMin, fiboMax, fiboLength);
+        fiboContext = buildFiboContext(fiboMin, fiboMax, fiboLength);
+        fibo = findSimpleFibo(fiboContext.max);
+        result = findFibo(fibo);
+        return fibonacciResult.innerHTML = result;    
+    } catch(error) {
+        return fibonacciResult.innerHTML = error.reason;
+    }
 }

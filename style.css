@@ -37,6 +37,15 @@
     display: block;
 }
 
+input[type="text"] {
+    border-radius: 3px;
+    font-size: 14px;
+}
+
+input[type="text"]:focus {
+    background: #dfe2ff;
+}
+
 label,
 button,
 p,
@@ -76,6 +85,7 @@ label {
 }
 
 .palindrom .task-content label,
-.tickets .task-content label {
+.tickets .task-content label,
+.fibonacci .task-content label {
     width: 300px;
 }

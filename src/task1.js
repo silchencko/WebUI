@@ -1,5 +1,8 @@
 var chessBoardBtn = document.querySelector('.chessBoard-btn');
 var chessBoardResult = document.querySelector('.chessBoard-result');
+var boardWidth = document.querySelector('#boardWidth');
+var boardLength = document.querySelector('#boardLength');
+var boardSymbol = document.querySelector('#boardSymbol');
 
 function ChessBoard(width, length, symbol) {
     this.width = width;
@@ -21,22 +24,18 @@ function drawChessBoard(board) {
 }
 
 function createBoard(width, length, symbol) {
-    if (existParams(width, length, symbol)) {
-        if (isNumeric(width, length)) {
-            return new ChessBoard(width, length, symbol);
-        }
-    }
+    existParams(width, length, symbol);
+    isNumeric(width, length);
+    return new ChessBoard(width, length, symbol);
 }
 
 function getChessBoard() {
     var result;
+    var width = boardWidth.value;
+    var length = boardLength.value;
+    var symbol = boardSymbol.value;
     try {
-        var boardWidth = document.querySelector('#boardWidth').value;
-        var boardLength = document.querySelector('#boardLength').value;
-        var boardSymbol = document.querySelector('#boardSymbol').value;
-
-        result = drawChessBoard(createBoard(boardWidth, boardLength, boardSymbol)); 
-
+        result = drawChessBoard(createBoard(width, length, symbol)); 
     } catch(error) {
         result = error.reason;
     };

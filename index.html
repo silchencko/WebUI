@@ -139,7 +139,7 @@
         <div class="task-content">
             <h3 class="task-title">Find palindrom</h3>
             <div>
-                <label for="palindrom-field">Enter a nomber more then 9</label>
+                <label for="palindrom-field">Enter a number more then 9</label>
                 <input id="palindrom-field" type="text" required="required" name="boardWidth" />
             </div>
             <button class="palindrom-btn">Find palindroms</button>
@@ -152,8 +152,8 @@
         <label class="task-label" for="task5">Task 5</label>
         <input id="task5" class="task-checkbox" type="checkbox" />
         <div class="task-content">
-            <h3 class="task-title">How many happy tickets are by Moscow method and Peter method?</h3>
-            <p>Every ticket contains 6 integers. Enter min ticket number and max ticket nomber:</p>
+            <h3 class="task-title">How many happy tickets are by Mirror method and Even-Odd method?</h3>
+            <p>Every ticket contains 6 integers. Mirror method: sum of the firts 3 integers is equal to the sum of the last 3 integers. Even-Odd method: the sum of integers on the even positions is equal to the sum of integers on the odd positions. Enter min ticket number and max ticket number:</p>
             <div>
                 <label for="ticket-min">Min ticket number (min "000001")</label>
                 <input id="ticket-min" type="text" required="required" name="ticket-min" />
@@ -167,7 +167,51 @@
             <p class="result__value tickets-result"></p>
         </div>
     </div>
-    
+    <!-- Task 6 -->
+    <div class="integers">
+        <label class="task-label" for="task6">Task 6</label>
+        <input id="task6" class="task-checkbox" type="checkbox" />
+        <div class="task-content">
+            <h3 class="task-title">Find integers</h3>
+            <p>Find an adjusted Number of integers if their square is not less than adjusted Square</p>
+            <div>
+                <label for="integers-length">Number of integers</label>
+                <input id="integers-length" type="text" required="required" name="ticket-min" />
+            </div>
+            <div>
+                <label for="integers-square">Square</label>
+                <input id="integers-square" type="text" required="required" name="ticket-max" />
+            </div>
+            <button class="integers-btn">Find integers</button>
+            <h3 class="result">Result:</h3>
+            <p class="result__value integers-result"></p>
+        </div>
+    </div>
+    <!-- Task 7 -->
+    <div class="fibonacci">
+        <label class="task-label" for="task7">Task 7</label>
+        <input id="task7" class="task-checkbox" type="checkbox" />
+        <div class="task-content">
+            <h3 class="task-title">Show Fibonacci numbers</h3>
+            <p>Fibonacci numbers that fits the range or adjusted amount of Fibonacci. input either a range with min and max Fibonacci numbers or an amount of Fibonacci numbers.</p>
+            <div>
+                <label for="fibonacci-min">Min Fibonacci number</label>
+                <input id="fibonacci-min" type="text" required="required" name="ticket-min" />
+            </div>
+            <div>
+                <label for="fibonacci-max">Max Fibonacci number</label>
+                <input id="fibonacci-max" type="text" required="required" name="ticket-max" />
+            </div>
+            <hr />
+            <div>
+                <label for="fibonacci-length">Amount</label>
+                <input id="fibonacci-length" type="text" required="required" name="ticket-max" />
+            </div>
+            <button class="fibonacci-btn">Show Fibonacci numbers</button>
+            <h3 class="result">Result:</h3>
+            <p class="result__value fibonacci-result"></p>
+        </div>
+    </div>
   
     <script src="src/task1.js"></script>
     <script src="src/task2.js"></script>
@@ -176,7 +220,6 @@
     <script src="src/task5.js"></script>
     <script src="src/task6.js"></script>
     <script src="src/task7.js"></script>
-    <script src="src/visualisation.js"></script>
     <script src="main.js"></script>
     
 </body>

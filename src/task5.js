@@ -1,5 +1,7 @@
 var ticketsBtn = document.querySelector('.tickets-btn');
 var ticketsResult = document.querySelector('.tickets-result');
+var minContext = document.querySelector('#ticket-min');
+var maxContext = document.querySelector('#ticket-max');
 
 function TicketsRange(min, max) {
     this.min = min;
@@ -21,14 +23,12 @@ function HappyTicketsResult(numHappyByMirror, numHappyEvenOdd) {
 };
 
 function isContextReal(min, max) {
-    if (existParams(min, max)) {
-        if (isNumeric(min, max)) {
-            if ((parseFloat(min) > parseFloat(max, 10))) {
-                throw new Error('Max must be more than min');
-            } else {
-                return true;
-            }
-        }
+    existParams(min, max);
+    isNumeric(min, max);
+    if (parseFloat(min) > parseFloat(max)) {
+        throw new Error('Max must be more than min');
+    } else {
+        return true;
     } 
 };
 
@@ -90,29 +90,29 @@ function isHappyEvenOdd(ticket) {
 };
 
 function countHappyTickets(cont, method) {
-    var count = 0;
+    var counter = 0;
     for (var i = parseInt(cont.min); i <= parseInt(cont.max); i++) {
         var fullTicket = makeFullTicket(i);
         if (method(fullTicket)) {
-            count++;
+            counter++;
         }
     }
-    return count;
+    return counter;
 };
 
 function buildHappyTicketsResult(cont) {
-    var quantityByMirror = countHappyTickets(cont, isHappyByMirror),
-        quantityEvenOdd = countHappyTickets(cont, isHappyEvenOdd);
+    var quantityByMirror = countHappyTickets(cont, isHappyByMirror);
+    var quantityEvenOdd = countHappyTickets(cont, isHappyEvenOdd);
     var result = new HappyTicketsResult(quantityByMirror, quantityEvenOdd);
     return result;
 }
 
 function getHappyTicketsResult() {
-    try {
-        var context,
+    var context,
         result;
-        var minTicket = document.querySelector('#ticket-min').value;
-        var maxTicket = document.querySelector('#ticket-max').value;
+        var minTicket = minContext.value;
+        var maxTicket = maxContext.value;
+     try {    
         if (checkContext(minTicket, maxTicket)) {
             context = new TicketsRange(minTicket, maxTicket);
             result = buildHappyTicketsResult(context);
